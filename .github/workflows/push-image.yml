@@ -60,14 +60,14 @@ jobs:
       - name: Cloner le dépôt d'infrastructure
         uses: actions/checkout@v4
         with:
-          repository: 'manarbensa/kustomize.git' # A REMPLACER (ex: <VOTRE_USER_GITHUB>/gitops-infra)
+          repository: 'manarbensa/helm.git' # A REMPLACER (ex: <VOTRE_USER_GITHUB>/gitops-infra)
           token: ${{ secrets.GITOPS_PAT }}
           path: 'infra-repo' # On clone dans un sous-dossier pour ne pas écraser l'espace de travail
 
       - name: Mettre à jour la version de l'image
         working-directory: ./infra-repo/dev
         run: |
-          kustomize edit set image spring-petclinic=ghcr.io/<VOTRE_USER_GITHUB>/spring-petclinic:${{ github.sha }}
+          kustomize edit set image spring-petclinic=ghcr.io/manarbensaa/spring-petclinic:${{ github.sha }}
 
       - name: Commit et Push vers le dépôt d'infrastructure
         working-directory: ./infra-repo
